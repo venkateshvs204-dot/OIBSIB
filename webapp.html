@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>To-Do List Web App</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
+body{
+background:url("https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1200")
+center/cover no-repeat;
+height:100vh;
+padding:40px;
+}
+
+.container{
+max-width:1100px;
+margin:auto;
+}
+
+.header{
+background:#eee;
+padding:12px;
+font-size:24px;
+font-weight:bold;
+margin-bottom:20px;
+}
+
+.main{
+display:flex;
+gap:20px;
+}
+
+.form-box{
+width:35%;
+background:white;
+padding:20px;
+border-radius:5px;
+}
+
+.form-box input,
+.form-box textarea{
+width:100%;
+padding:10px;
+margin-bottom:10px;
+border:1px solid #ccc;
+}
+
+.form-box textarea{
+height:150px;
+resize:none;
+}
+
+.save-btn{
+width:100%;
+padding:12px;
+background:#28a745;
+color:white;
+border:none;
+cursor:pointer;
+font-size:16px;
+}
+
+.task-box{
+flex:1;
+color:white;
+}
+
+.task-header{
+display:grid;
+grid-template-columns:1fr 2fr 100px;
+padding:10px;
+font-weight:bold;
+}
+
+.task{
+display:grid;
+grid-template-columns:1fr 2fr 100px;
+background:#ddd;
+color:black;
+padding:15px;
+margin-top:15px;
+border-radius:5px;
+align-items:center;
+}
+
+.delete-btn{
+background:#dc3545;
+color:white;
+border:none;
+padding:8px 12px;
+cursor:pointer;
+border-radius:4px;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="header">
+To-Do List Web App
+</div>
+
+<div class="main">
+
+<div class="form-box">
+
+<input type="text" id="title" placeholder="Title">
+
+<textarea id="desc" placeholder="Description"></textarea>
+
+<button class="save-btn" onclick="addTask()">
+Save
+</button>
+
+</div>
+
+<div class="task-box">
+
+<div class="task-header">
+<div>Title</div>
+<div>Description</div>
+<div>Delete</div>
+</div>
+
+<div id="taskList"></div>
+
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+function addTask(){
+
+let title=document.getElementById("title").value;
+let desc=document.getElementById("desc").value;
+
+if(title==="" || desc===""){
+alert("Please fill all fields");
+return;
+}
+
+let task=document.createElement("div");
+
+task.className="task";
+
+task.innerHTML=`
+<div>${title}</div>
+<div>${desc}</div>
+<div>
+<button class="delete-btn"
+onclick="this.parentElement.parentElement.remove()">
+X
+</button>
+</div>
+`;
+
+document.getElementById("taskList").appendChild(task);
+
+document.getElementById("title").value="";
+document.getElementById("desc").value="";
+}
+
+</script>
+
+</body>
+</html>

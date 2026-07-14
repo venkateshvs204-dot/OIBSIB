@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pizza Delivery App</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
+
+body{
+    background:linear-gradient(135deg,#ffecd2,#fcb69f);
+    padding:20px;
+}
+
+h1{
+    text-align:center;
+    color:#d84315;
+    margin-bottom:20px;
+}
+
+.menu{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:20px;
+}
+
+.card{
+    background:white;
+    border-radius:15px;
+    overflow:hidden;
+    box-shadow:0 4px 12px rgba(0,0,0,0.2);
+    transition:0.3s;
+}
+
+.card:hover{
+    transform:translateY(-8px);
+}
+
+.card img{
+    width:100%;
+    height:220px;
+    object-fit:cover;
+}
+
+.card-content{
+    padding:15px;
+    text-align:center;
+}
+
+.card h3{
+    color:#d84315;
+    margin-bottom:10px;
+}
+
+.price{
+    font-size:20px;
+    font-weight:bold;
+    color:green;
+    margin:10px 0;
+}
+
+button{
+    background:#ff5722;
+    color:white;
+    border:none;
+    padding:10px 20px;
+    border-radius:5px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#e64a19;
+}
+
+.cart{
+    margin-top:30px;
+    background:white;
+    padding:20px;
+    border-radius:15px;
+    box-shadow:0 4px 12px rgba(0,0,0,0.2);
+}
+
+.cart h2{
+    color:#d84315;
+    margin-bottom:10px;
+}
+
+#cartItems li{
+    margin:8px 0;
+}
+
+.total{
+    margin-top:15px;
+    font-size:22px;
+    font-weight:bold;
+    color:green;
+}
+
+.order-btn{
+    margin-top:15px;
+    width:100%;
+    background:#28a745;
+}
+</style>
+</head>
+<body>
+
+<h1>🍕 Pizza Delivery App</h1>
+
+<div class="menu">
+
+    <!-- Veg Pizza -->
+    <div class="card">
+        <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?w=800" alt="Veg Pizza">
+        <div class="card-content">
+            <h3>Veg Pizza</h3>
+            <p>Fresh vegetables, mozzarella cheese</p>
+            <div class="price">₹199</div>
+            <button onclick="addToCart('Veg Pizza',199)">Add to Cart</button>
+        </div>
+    </div>
+
+    <!-- Paneer Pizza -->
+    <div class="card">
+        <img src="https://images.unsplash.com/photo-1604382355076-af4b0eb60143?w=800" alt="Paneer Pizza">
+        <div class="card-content">
+            <h3>Paneer Pizza</h3>
+            <p>Paneer cubes, onions, capsicum & cheese</p>
+            <div class="price">₹249</div>
+            <button onclick="addToCart('Paneer Pizza',249)">Add to Cart</button>
+        </div>
+    </div>
+
+    <!-- Chicken Pizza -->
+    <div class="card">
+        <img src="https://images.unsplash.com/photo-1594007654729-407eedc4be65?w=800" alt="Chicken Pizza">
+        <div class="card-content">
+            <h3>Chicken Pizza</h3>
+            <p>Grilled chicken, cheese & special sauce</p>
+            <div class="price">₹349</div>
+            <button onclick="addToCart('Chicken Pizza',349)">Add to Cart</button>
+        </div>
+    </div>
+
+</div>
+
+<div class="cart">
+    <h2>🛒 Your Cart</h2>
+    <ul id="cartItems"></ul>
+
+    <div class="total">
+        Total: ₹<span id="total">0</span>
+    </div>
+
+    <button class="order-btn" onclick="placeOrder()">
+        Place Order
+    </button>
+</div>
+
+<script>
+
+let total = 0;
+
+function addToCart(name, price){
+
+    let item = document.createElement("li");
+    item.textContent = `${name} - ₹${price}`;
+
+    document.getElementById("cartItems").appendChild(item);
+
+    total += price;
+    document.getElementById("total").textContent = total;
+}
+
+function placeOrder(){
+
+    if(total === 0){
+        alert("Please add at least one pizza!");
+        return;
+    }
+
+    alert("🎉 Order Placed Successfully!\nTotal Amount: ₹" + total);
+
+    document.getElementById("cartItems").innerHTML = "";
+    document.getElementById("total").textContent = "0";
+    total = 0;
+}
+
+</script>
+
+</body>
+</html>

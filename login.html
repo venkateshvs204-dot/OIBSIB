@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Secure Login Portal</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI',sans-serif;
+}
+
+body{
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:linear-gradient(-45deg,#0f172a,#1e3a8a,#7c3aed,#0f172a);
+    background-size:400% 400%;
+    animation:bg 10s ease infinite;
+}
+
+@keyframes bg{
+    0%{background-position:0% 50%;}
+    50%{background-position:100% 50%;}
+    100%{background-position:0% 50%;}
+}
+
+.card{
+    width:350px;
+    padding:30px;
+    border-radius:20px;
+    backdrop-filter:blur(15px);
+    background:rgba(255,255,255,0.1);
+    border:1px solid rgba(255,255,255,0.2);
+    box-shadow:0 0 25px rgba(255,255,255,0.2);
+    color:white;
+}
+
+h2{
+    text-align:center;
+    margin-bottom:20px;
+}
+
+.input-group{
+    margin-bottom:15px;
+}
+
+input{
+    width:100%;
+    padding:12px;
+    border:none;
+    border-radius:10px;
+    outline:none;
+}
+
+.password-box{
+    display:flex;
+    gap:5px;
+}
+
+.password-box button{
+    width:60px;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+}
+
+.login-btn{
+    width:100%;
+    padding:12px;
+    border:none;
+    border-radius:10px;
+    background:#22c55e;
+    color:white;
+    font-size:16px;
+    cursor:pointer;
+    margin-top:10px;
+}
+
+.login-btn:hover{
+    background:#16a34a;
+}
+
+.error{
+    color:#ff6b6b;
+    text-align:center;
+    margin-top:10px;
+}
+
+.dashboard{
+    display:none;
+    text-align:center;
+}
+
+.dashboard h1{
+    margin-bottom:15px;
+}
+
+.logout{
+    margin-top:15px;
+    padding:10px 20px;
+    border:none;
+    border-radius:10px;
+    background:#ef4444;
+    color:white;
+    cursor:pointer;
+}
+</style>
+</head>
+<body>
+
+<div class="card">
+
+<div id="loginPage">
+
+<h2>🔐 Secure Login Portal</h2>
+
+<div class="input-group">
+<input type="text" id="username" placeholder="Username">
+</div>
+
+<div class="input-group">
+<div class="password-box">
+<input type="password" id="password" placeholder="Password">
+<button onclick="togglePassword()">👁</button>
+</div>
+</div>
+
+<button class="login-btn" onclick="login()">
+Login
+</button>
+
+<p id="error" class="error"></p>
+
+<p style="text-align:center;margin-top:15px;">
+Demo: admin / 1234
+</p>
+
+</div>
+
+<div id="dashboard" class="dashboard">
+
+<h1>🎉 Welcome Admin</h1>
+
+<p>You have successfully logged in.</p>
+
+<p style="margin-top:10px;">
+🔒 Secure Dashboard Access Granted
+</p>
+
+<button class="logout" onclick="logout()">
+Logout
+</button>
+
+</div>
+
+</div>
+
+<script>
+
+function togglePassword(){
+let pass=document.getElementById("password");
+
+if(pass.type==="password"){
+pass.type="text";
+}else{
+pass.type="password";
+}
+}
+
+function login(){
+
+let user=document.getElementById("username").value;
+let pass=document.getElementById("password").value;
+
+if(user==="admin" && pass==="1234"){
+
+document.getElementById("loginPage").style.display="none";
+document.getElementById("dashboard").style.display="block";
+
+}else{
+
+document.getElementById("error").innerText=
+"❌ Invalid Username or Password";
+
+}
+}
+
+function logout(){
+
+document.getElementById("dashboard").style.display="none";
+document.getElementById("loginPage").style.display="block";
+
+document.getElementById("username").value="";
+document.getElementById("password").value="";
+document.getElementById("error").innerText="";
+
+}
+</script>
+
+</body>
+</html>
